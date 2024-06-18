@@ -1,7 +1,6 @@
 import React from "react";
-import Emblem from "../../../assets/images/emblem.webp";
-import Logo from "../../../assets/images/logo.webp";
-import MilitaryLogo from "../../../assets/images/logo-one.jpg";
+import Logo from "../../assets/images/logo.webp";
+import MilitaryLogo from "../../assets/images/logo-one.jpg";
 import Image from "next/image";
 
 const Header = () => {

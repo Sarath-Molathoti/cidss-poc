@@ -48,6 +48,7 @@ const MultiLevelDropdown = ({
             : "hidden"
         } ${menuClassName} min-w-max`}
         // style={{ minWidth: "7rem" }}
+        style={{ zIndex: 100 }}
       >
         {items.map((item, index) => (
           <li key={index} className="relative">

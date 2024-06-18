@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import Modal from "@/components/Modal";
+import Modal from "../../../../components/Modal.jsx";
 
 const WpmMgt = () => {
   const [isModalOpen, setIsModalOpen] = useState(true);

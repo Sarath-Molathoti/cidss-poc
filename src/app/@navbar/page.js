@@ -1,11 +1,16 @@
 "use client";
 
 import React from "react";
-import MultiLevelDropdown from "@/components/NestedDropdown";
-import Logo from "../../../assets/images/flag.jpg";
-import MilitaryLogo from "../../../assets/images/logo-one.jpg";
+import MultiLevelDropdown from "../../components/NestedDropdown.jsx";
+import Logo from "../../assets/images/flag.jpg";
+import MilitaryLogo from "../../assets/images/logo-one.jpg";
 
 const menuData = {
+  HOME: {
+    image: Logo,
+    items: [],
+    component: "/",
+  },
   "RESOURCE MGT": {
     image: Logo,
     items: [
@@ -100,7 +105,7 @@ const menuData = {
 
 const Home = () => {
   return (
-    <div className="relative mx-auto p-2 w-full bg-violet-800">
+    <div className="relative mx-auto p-2 w-full bg-violet-900">
       <div className="flex space-x-4 ">
         {Object.keys(menuData).map((menu, index) => (
           <MultiLevelDropdown
@@ -108,7 +113,7 @@ const Home = () => {
             title={menu}
             data={menuData[menu].items || menuData[menu]}
             topLevelIcon={menuData[menu].image}
-            buttonClassName=" bg-violet-800 text-white border-0 hover:bg-violet-600"
+            buttonClassName="border-0 hover:bg-violet-700 bg-violet-900 text-white"
             menuClassName="custom-menu-class"
           />
         ))}

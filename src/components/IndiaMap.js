@@ -21,6 +21,7 @@ const IndiaMap = () => {
         center={[20.5937, 78.9629]}
         zoom={5}
         className="w-full h-full"
+        style={{ zIndex: 10 }}
       >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
