@@ -91,7 +91,7 @@ const menuData = {
 
 const Home = () => {
   return (
-    <div className="container mx-auto p-4 w-full h-full bg-slate-400">
+    <div className="fixed h-[7vh] mx-auto p-4 w-full  bg-slate-400">
       <div className="flex space-x-4">
         {Object.keys(menuData).map((menu, index) => (
           <MultiLevelDropdown
