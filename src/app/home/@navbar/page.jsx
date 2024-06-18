@@ -1,24 +1,30 @@
 "use client";
 
 import React from "react";
-import MultiLevelDropdown from "@/components/NestedDropdown"; // Adjust path as needed
+import MultiLevelDropdown from "@/components/NestedDropdown";
 import Logo from "../../../assets/images/flag.jpg";
+import MilitaryLogo from "../../../assets/images/logo-one.jpg";
 
 const menuData = {
   "RESOURCE MGT": {
-    image: Logo, // Specify the image path for RESOURCE MGT
+    image: Logo,
     items: [
-      { name: "Lgs Overview", image: Logo },
-      { name: "Wpn Mgt", image: Logo },
+      {
+        name: "Lgs Overview",
+        image: MilitaryLogo,
+        component: "/menu/pages/charts",
+      },
+      { name: "Wpn Mgt", image: Logo, component: "/menu/pages/wpn-mgt" },
       {
         name: "Engg. Store Mgt",
-        image: Logo, // Icon for Engg. Store Mgt (if different from RESOURCE MGT)
+        image: Logo,
         subItems: [
           {
             name: "Def Bricks Store",
             image: Logo,
+            component: "/",
           },
-          { name: "ETSR Store", image: Logo },
+          { name: "ETSR Store", image: MilitaryLogo, component: "/" },
           {
             name: "CETB Store",
             image: Logo,
@@ -26,79 +32,84 @@ const menuData = {
               {
                 name: "Home Goods",
                 image: Logo,
+                component: "/",
               },
               {
                 name: "Garden Tools",
                 image: Logo,
+                component: "/",
               },
             ],
           },
         ],
       },
-      { name: "UE Mgt", image: Logo },
+      { name: "UE Mgt", image: MilitaryLogo, component: "/" },
     ],
   },
-  "RESOURCE MGT2": {
-    image: Logo, // Specify the image path for RESOURCE MGT2
-    items: [
-      { name: "Lgs Overview", image: Logo },
-      { name: "Wpn Mgt", image: Logo },
-      {
-        name: "Engg. Store Mgt",
-        image: Logo, // Icon for Engg. Store Mgt (if different from RESOURCE MGT2)
-        subItems: [
-          {
-            name: "Def Bricks Store",
-            image: Logo,
-          },
-          { name: "ETSR Store", image: Logo },
-          {
-            name: "CETB Store",
-            image: Logo,
-            subItems: [
-              {
-                name: "Home Goods",
-                image: Logo,
-              },
-              {
-                name: "Garden Tools",
-                image: Logo,
-              },
-            ],
-          },
-        ],
-      },
-      { name: "UE Mgt", image: Logo },
-    ],
-  },
+
   MOB: {
-    image: Logo, // Specify the image path for MOB
+    image: MilitaryLogo,
     items: [
-      { name: "Mobilisation", image: Logo },
+      { name: "Mobilisation", image: MilitaryLogo, component: "/" },
       {
         name: "Road Mov",
-        image: Logo, // Icon for Road Mov (if different from MOB)
+        image: Logo,
         subItems: [
-          { name: "Simulation", image: Logo },
-          { name: "Actual Plan", image: Logo },
+          { name: "Simulation", image: MilitaryLogo, component: "/" },
+          { name: "Actual Plan", image: Logo, component: "/" },
         ],
       },
-      { name: "Electronics", image: Logo },
+      {
+        name: "Rail Mov",
+        image: Logo,
+        subItems: [
+          { name: "ORMP Details", image: MilitaryLogo, component: "/" },
+        ],
+      },
+      {
+        name: "Air Mov",
+        image: Logo,
+        subItems: [
+          { name: "Aircrafts Master", image: Logo, component: "/" },
+          { name: "Airfield Master", image: MilitaryLogo, component: "/" },
+          { name: "Load Table", image: Logo, component: "/" },
+          { name: "OAMP Details", image: Logo, component: "/" },
+          { name: "Schedule Generation", image: Logo, component: "/" },
+          {
+            name: "Monitor Air Schedule",
+            image: Logo,
+            component: "/",
+          },
+          { name: "Estimation", image: MilitaryLogo, component: "/" },
+        ],
+      },
+      { name: "Electronics", image: Logo, component: "/" },
     ],
   },
-  // Include other menu items as necessary
+  Mail: {
+    image: Logo,
+    items: [],
+    component: "/",
+  },
+  "Instant Message": {
+    image: Logo,
+    items: [],
+    component: "/",
+  },
 };
 
 const Home = () => {
   return (
-    <div className="fixed h-[7vh] mx-auto p-4 w-full  bg-slate-400">
-      <div className="flex space-x-4">
+    <div className="relative mx-auto p-2 w-full bg-violet-800">
+      <div className="flex space-x-4 ">
         {Object.keys(menuData).map((menu, index) => (
           <MultiLevelDropdown
             key={index}
             title={menu}
             data={menuData[menu].items || menuData[menu]}
             topLevelIcon={menuData[menu].image}
+            buttonClassName=" bg-violet-800 text-white border-0 hover:bg-violet-600"
+            menuClassName="custom-menu-class"
           />
         ))}
       </div>

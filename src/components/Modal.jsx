@@ -1,54 +1,75 @@
+// components/Modal.js
 "use client";
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { FaWindowMinimize, FaWindowMaximize, FaTimes } from "react-icons/fa";
+import { useState } from "react";
+import Draggable from "react-draggable";
 
-const Modal = ({ isOpen, onClose, title, logo, children, actions }) => {
+import { IoMdClose } from "react-icons/io";
+import { FaPlus, FaMinus, FaCcApplePay } from "react-icons/fa6";
+const Modal = ({
+  title,
+  children,
+  onClose,
+  actions,
+  customWidth,
+  customHeight,
+}) => {
   const [isMaximized, setIsMaximized] = useState(false);
 
-  if (!isOpen) return null;
+  const handleMaximize = () => {
+    setIsMaximized(!isMaximized);
+  };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50">
-      <div className="fixed inset-0 bg-gray-800 bg-opacity-75 transition-opacity"></div>
-      <div
-        className={`relative bg-white rounded shadow-lg transform transition-all ${
-          isMaximized ? "w-full h-full" : "w-11/12 md:w-1/2 lg:w-1/3"
-        }`}
-      >
-        <div className="flex items-center justify-between p-4 border-b border-gray-300">
-          <div className="flex items-center space-x-2">
-            {logo && <img src={logo} alt="logo" className="h-8 w-8" />}
-            <h2 className="text-lg font-semibold">{title}</h2>
+    <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
+      <Draggable handle=".modal-header">
+        <div
+          className={`flex flex-col bg-white rounded-lg shadow-lg transition-all duration-300 ${
+            isMaximized
+              ? "w-11/12 h-5/6"
+              : `${customWidth || "w-1/2"} ${customHeight || "h-1/2"}`
+          }`}
+          style={
+            isMaximized
+              ? { marginTop: "7.5%", marginLeft: "2.5%", marginRight: "2.5%" }
+              : {}
+          }
+        >
+          <div className="modal-header flex justify-between items-center p-4 border-b border-gray-200 cursor-move">
+            <div className="flex items-center space-x-2">
+              <FaCcApplePay className="h-6 w-6 text-green-500" />
+              <h2 className="text-lg font-semibold">{title}</h2>
+            </div>
+            <div className="flex space-x-2">
+              <button onClick={handleMaximize} className="focus:outline-none">
+                {isMaximized ? (
+                  <FaMinus className="h-5 w-5 text-gray-500  " />
+                ) : (
+                  <FaPlus className="h-5 w-5 text-gray-500 " />
+                )}
+              </button>
+              <button onClick={onClose} className="focus:outline-none">
+                <IoMdClose className="h-6 w-6 ml-2 text-gray-500" />
+              </button>
+            </div>
           </div>
-          <div className="flex space-x-2">
-            <button
-              onClick={() => setIsMaximized(!isMaximized)}
-              className="focus:outline-none"
-            >
-              {isMaximized ? <FaWindowMinimize /> : <FaWindowMaximize />}
-            </button>
-            <button onClick={onClose} className="focus:outline-none">
-              <FaTimes />
-            </button>
-          </div>
+          <div className="flex-1 p-4 overflow-auto">{children}</div>
+          {actions && (
+            <div className="flex justify-end p-4 border-t border-gray-200 space-x-2">
+              {actions.map((action, index) => (
+                <button
+                  key={index}
+                  onClick={action.onClick}
+                  className={`px-4 py-2 rounded ${action.className}`}
+                >
+                  {action.label}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
-        <div className="p-4">{children}</div>
-        <div className="p-4 border-t border-gray-300 flex justify-end space-x-2">
-          {actions}
-        </div>
-      </div>
+      </Draggable>
     </div>
   );
-};
-
-Modal.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired,
-  logo: PropTypes.string,
-  children: PropTypes.node.isRequired,
-  actions: PropTypes.node.isRequired,
 };
 
 export default Modal;

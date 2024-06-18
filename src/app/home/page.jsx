@@ -13,8 +13,26 @@ const IndiaMap = dynamic(() => import("../../components/IndiaMap"), {
 const Content = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleOpenModal = () => setIsModalOpen(true);
-  const handleCloseModal = () => setIsModalOpen(false);
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
+  const actions = [
+    {
+      label: "Cancel",
+      onClick: closeModal,
+      className:
+        "bg-white border border-violet-600 text-violet-600 hover:bg-violet-700 hover:text-white",
+    },
+    {
+      label: "Save",
+      onClick: () => {
+        // Perform save action
+        alert("Saved!");
+        closeModal();
+      },
+      className: "bg-violet-700 text-white hover:bg-violet-600",
+    },
+  ];
   const data = [
     { name: "Page A", uv: 4000, pv: 2400, amt: 2400 },
     { name: "Page B", uv: 3000, pv: 1398, amt: 2210 },
@@ -64,35 +82,27 @@ const Content = () => {
       /> */}
 
       <button
-        onClick={handleOpenModal}
-        className="bg-blue-500 text-white px-4 py-2 rounded"
+        onClick={openModal}
+        className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
       >
         Open Modal
       </button>
-      <Modal
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        title="Modal Title"
-        logo={Logo} // Replace with the actual path to your logo
-        actions={
-          <>
-            <button
-              onClick={handleCloseModal}
-              className="bg-gray-500 text-white px-4 py-2 rounded"
-            >
-              Cancel
-            </button>
-            <button
-              onClick={() => alert("Action confirmed")}
-              className="bg-blue-500 text-white px-4 py-2 rounded"
-            >
-              Confirm
-            </button>
-          </>
-        }
-      >
-        <p>This is the body content of the modal.</p>
-      </Modal>
+      {isModalOpen && (
+        <Modal
+          title="Modal Title"
+          onClose={closeModal}
+          actions={actions}
+          customWidth="w-1/4"
+          customHeight="h-1/4"
+        >
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam sequi
+            accusantium eius tempore voluptatibus necessitatibus amet quasi
+            omnis numquam corporis, magni nostrum earum nam odit iste sed
+            doloribus ratione cum.
+          </p>
+        </Modal>
+      )}
     </div>
   );
 };
