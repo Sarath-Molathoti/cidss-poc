@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import Modal from "../../../../components/Modal.jsx";
+import Modal from "../../../components/Modal.jsx";
 
 const WpmMgt = () => {
   const [isModalOpen, setIsModalOpen] = useState(true);
@@ -27,20 +27,14 @@ const WpmMgt = () => {
   ];
 
   return (
-    <div className="h-full w-full bg-gray-100">
-      {/* <button
-        onClick={openModal}
-        className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-      >
-        Open Modal
-      </button> */}
+    <>
       {isModalOpen && (
         <Modal
-          title="Modal Title"
+          title="Wps Management"
           onClose={closeModal}
           actions={actions}
           customWidth="w-1/4"
-          customHeight="h-1/4"
+          customHeight="h-1/3"
         >
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam sequi
@@ -50,7 +44,7 @@ const WpmMgt = () => {
           </p>
         </Modal>
       )}
-    </div>
+    </>
   );
 };
 

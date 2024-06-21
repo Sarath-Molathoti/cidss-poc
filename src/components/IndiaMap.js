@@ -16,7 +16,7 @@ L.Icon.Default.mergeOptions({
 
 const IndiaMap = () => {
   return (
-    <div className="w-full h-[90vh]">
+    <div className="w-full h-full">
       <MapContainer
         center={[20.5937, 78.9629]}
         zoom={5}

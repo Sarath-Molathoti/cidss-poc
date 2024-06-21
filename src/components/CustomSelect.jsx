@@ -12,6 +12,7 @@ const CustomSelect = ({
   containerClassName = "",
   labelClassName = "",
   selectClassName = "",
+  error = null,
   ...props
 }) => {
   return (
@@ -40,6 +41,7 @@ const CustomSelect = ({
           </option>
         ))}
       </select>
+      {error && <p className="text-red-500 text-xs mt-2">{error}</p>}
     </div>
   );
 };
@@ -59,6 +61,7 @@ CustomSelect.propTypes = {
   containerClassName: PropTypes.string,
   labelClassName: PropTypes.string,
   selectClassName: PropTypes.string,
+  error: PropTypes.string,
 };
 
 export default CustomSelect;

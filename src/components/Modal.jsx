@@ -2,9 +2,9 @@
 "use client";
 import { useState } from "react";
 import Draggable from "react-draggable";
-
 import { IoMdClose } from "react-icons/io";
 import { FaPlus, FaMinus, FaCcApplePay } from "react-icons/fa6";
+
 const Modal = ({
   title,
   children,
@@ -20,10 +20,13 @@ const Modal = ({
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
+    <div
+      className="fixed inset-0 z-50 flex justify-center items-center pointer-events-none"
+      style={{ marginTop: "16vh" }}
+    >
       <Draggable handle=".modal-header">
         <div
-          className={`flex flex-col bg-white rounded-lg shadow-lg transition-all duration-300 ${
+          className={`flex flex-col bg-white rounded-lg shadow-lg transition-all duration-300 pointer-events-auto ${
             isMaximized
               ? "w-11/12 h-5/6"
               : `${customWidth || "w-1/2"} ${customHeight || "h-1/2"}`
@@ -42,9 +45,9 @@ const Modal = ({
             <div className="flex space-x-2">
               <button onClick={handleMaximize} className="focus:outline-none">
                 {isMaximized ? (
-                  <FaMinus className="h-5 w-5 text-gray-500  " />
+                  <FaMinus className="h-5 w-5 text-gray-500" />
                 ) : (
-                  <FaPlus className="h-5 w-5 text-gray-500 " />
+                  <FaPlus className="h-5 w-5 text-gray-500" />
                 )}
               </button>
               <button onClick={onClose} className="focus:outline-none">

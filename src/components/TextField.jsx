@@ -13,6 +13,7 @@ const TextField = ({
   labelClassName = "",
   inputClassName = "",
   prefixIcon = null,
+  error = null,
   ...props
 }) => {
   return (
@@ -43,6 +44,7 @@ const TextField = ({
           {...props}
         />
       </div>
+      {error && <p className="text-red-500 text-xs mt-2">{error}</p>}
     </div>
   );
 };
@@ -58,6 +60,7 @@ TextField.propTypes = {
   labelClassName: PropTypes.string,
   inputClassName: PropTypes.string,
   prefixIcon: PropTypes.node, // Optional prop for prefix icon
+  error: PropTypes.string,
 };
 
 export default TextField;

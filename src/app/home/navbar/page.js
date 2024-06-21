@@ -1,9 +1,10 @@
 "use client";
 
-import React from "react";
-import MultiLevelDropdown from "../../components/NestedDropdown.jsx";
-import Logo from "../../assets/images/flag.jpg";
-import MilitaryLogo from "../../assets/images/logo-one.jpg";
+import React, { useState, useEffect } from "react";
+import MultiLevelDropdown from "../../../components/NestedDropdown.jsx";
+import Logo from "../../../assets/images/flag.jpg";
+import MilitaryLogo from "../../../assets/images/logo-one.jpg";
+import Button from "../../../components/Button.jsx";
 
 const menuData = {
   HOME: {
@@ -17,9 +18,9 @@ const menuData = {
       {
         name: "Lgs Overview",
         image: MilitaryLogo,
-        component: "/menu/pages/charts",
+        component: "/menu/charts",
       },
-      { name: "Wpn Mgt", image: Logo, component: "/menu/pages/wpn-mgt" },
+      { name: "Wpn Mgt", image: Logo, component: "/menu/wpn-mgt" },
       {
         name: "Engg. Store Mgt",
         image: Logo,
@@ -103,23 +104,38 @@ const menuData = {
   },
 };
 
-const Home = () => {
+const NavBar = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
+  useEffect(() => {
+    const storedUserDetails = JSON.parse(localStorage.getItem("loggedIn"));
+    if (storedUserDetails && storedUserDetails === "true") {
+      setLoggedIn(true);
+    }
+  }, []);
   return (
-    <div className="relative mx-auto p-2 w-full bg-violet-900">
-      <div className="flex space-x-4 ">
-        {Object.keys(menuData).map((menu, index) => (
-          <MultiLevelDropdown
-            key={index}
-            title={menu}
-            data={menuData[menu].items || menuData[menu]}
-            topLevelIcon={menuData[menu].image}
-            buttonClassName="border-0 hover:bg-violet-700 bg-violet-900 text-white"
-            menuClassName="custom-menu-class"
-          />
-        ))}
-      </div>
-    </div>
+    <>
+      {loggedIn ? (
+        <div className="relative mx-auto p-2 w-full bg-violet-900 h-[6vh]">
+          <div className="flex justify-between align-middle space-x-4 ">
+            <div>
+              {" "}
+              {Object.keys(menuData).map((menu, index) => (
+                <MultiLevelDropdown
+                  key={index}
+                  title={menu}
+                  data={menuData[menu].items || menuData[menu]}
+                  topLevelIcon={menuData[menu].image}
+                  buttonClassName="border-0 hover:bg-violet-700 bg-violet-900 text-white"
+                  menuClassName="custom-menu-class"
+                />
+              ))}
+            </div>
+            <div>Logout</div>
+          </div>
+        </div>
+      ) : null}
+    </>
   );
 };
 
-export default Home;
+export default NavBar;
