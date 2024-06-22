@@ -21,21 +21,17 @@ const Modal = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex justify-center items-center pointer-events-none"
+      className="fixed inset-0 z-50 flex justify-center pointer-events-none"
       style={{ marginTop: "16vh" }}
     >
       <Draggable handle=".modal-header">
         <div
           className={`flex flex-col bg-white rounded-lg shadow-lg transition-all duration-300 pointer-events-auto ${
             isMaximized
-              ? "w-11/12 h-5/6"
+              ? "w-11/12 h-[90vh)]"
               : `${customWidth || "w-1/2"} ${customHeight || "h-1/2"}`
           }`}
-          style={
-            isMaximized
-              ? { marginTop: "7.5%", marginLeft: "2.5%", marginRight: "2.5%" }
-              : {}
-          }
+          style={isMaximized ? { marginLeft: "2.5%", marginRight: "2.5%" } : {}}
         >
           <div className="modal-header flex justify-between items-center p-4 border-b border-gray-200 cursor-move">
             <div className="flex items-center space-x-2">

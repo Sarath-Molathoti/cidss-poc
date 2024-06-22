@@ -43,7 +43,7 @@ const LgsOverview = () => {
           customWidth="w-9/10"
           customHeight="h-7/8"
         >
-          <div className="grid grid-flow-row grid-cols-3 gap-3">
+          <div className="grid grid-flow-row grid-cols-1 lg:grid-cols-3 gap-3">
             <div className="border-2 border-slate-800">
               <PieChart
                 data={pieData}

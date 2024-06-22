@@ -75,8 +75,8 @@ const Login = ({ setLoggedIn }) => {
     }
   };
   return (
-    <div className="bg-custom-image w-full h-full lg:h-screen sm:py-32 flex items-center justify-center ">
-      <div className="border-8 border-white rounded-lg w-[80vw]  grid sm:grid-cols-1 lg:grid-cols-2 lg:fixed">
+    <div className="bg-custom-image w-full h-full lg:h-screen sm:py-32 flex items-center justify-center">
+      <div className="border-8 border-slate-500 rounded-lg w-[80vw]  grid sm:grid-cols-1 lg:grid-cols-2 lg:fixed">
         <div className="bg-violet-800  p-20 h-full lg:h-[80vh]">
           <div className="flex flex-col align-middle justify-center ">
             <h2 className="text-white text-xl lg:text-4xl font-bold">

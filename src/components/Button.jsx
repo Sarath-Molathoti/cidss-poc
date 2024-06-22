@@ -7,6 +7,8 @@ const Button = ({
   block = false,
   active = false,
   disabled = false,
+  prefixIcon: PrefixIcon = null,
+  suffixIcon: SuffixIcon = null,
   children,
   ...props
 }) => {
@@ -49,7 +51,9 @@ const Button = ({
 
   return (
     <button className={classes} disabled={disabled} {...props}>
-      {children}
+      {PrefixIcon && <PrefixIcon className="mr-2 inline-block" />}
+      <span className="inline-block">{children}</span>
+      {SuffixIcon && <SuffixIcon className="ml-2 inline-block" />}
     </button>
   );
 };

@@ -4,8 +4,8 @@ import React, { useState, useEffect } from "react";
 import MultiLevelDropdown from "../../../components/NestedDropdown.jsx";
 import Logo from "../../../assets/images/flag.jpg";
 import MilitaryLogo from "../../../assets/images/logo-one.jpg";
-import Button from "../../../components/Button.jsx";
-
+import { FaPowerOff } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 const menuData = {
   HOME: {
     image: Logo,
@@ -89,7 +89,7 @@ const menuData = {
           { name: "Estimation", image: MilitaryLogo, component: "/" },
         ],
       },
-      { name: "Electronics", image: Logo, component: "/" },
+      { name: "Electronics", image: Logo, component: "/menu/electronics" },
     ],
   },
   Mail: {
@@ -105,6 +105,7 @@ const menuData = {
 };
 
 const NavBar = () => {
+  const router = useRouter();
   const [loggedIn, setLoggedIn] = useState(false);
   useEffect(() => {
     const storedUserDetails = JSON.parse(localStorage.getItem("loggedIn"));
@@ -112,6 +113,11 @@ const NavBar = () => {
       setLoggedIn(true);
     }
   }, []);
+  const handleLogout = (e) => {
+    e.preventDefault();
+    localStorage.setItem("loggedIn", JSON.stringify("true"));
+    router.push("/");
+  };
   return (
     <>
       {loggedIn ? (
@@ -130,7 +136,9 @@ const NavBar = () => {
                 />
               ))}
             </div>
-            <div>Logout</div>
+            <div onClick={(e) => handleLogout(e)}>
+              <FaPowerOff className="text-white text-xl lg:text-2xl mt-2 cursor-pointer" />
+            </div>
           </div>
         </div>
       ) : null}

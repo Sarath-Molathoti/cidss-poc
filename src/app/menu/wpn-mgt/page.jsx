@@ -34,7 +34,7 @@ const WpmMgt = () => {
           onClose={closeModal}
           actions={actions}
           customWidth="w-1/4"
-          customHeight="h-1/3"
+          customHeight="h-1/2"
         >
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam sequi
