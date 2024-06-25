@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from "react";
 import Modal from "../../../components/Modal.jsx";
 import useModalStore from "../../../stores/ModalStore.jsx";
-const WpmMgt = () => {
+import Main from "./main.jsx";
+const UeMgt = () => {
   const incrementZIndex = useModalStore((state) => state.incrementZIndex);
 
   useEffect(() => {
@@ -40,23 +41,18 @@ const WpmMgt = () => {
     <>
       {isModalOpen && (
         <Modal
-          title="Wps Management"
+          title="UE Management"
           onClose={closeModal}
           actions={actions}
-          customWidth="w-1/4"
-          customHeight="h-1/2"
+          customWidth="w-5/6"
+          customHeight="h-9/10"
           zIndex={zIndex}
         >
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam sequi
-            accusantium eius tempore voluptatibus necessitatibus amet quasi
-            omnis numquam corporis, magni nostrum earum nam odit iste sed
-            doloribus ratione cum.
-          </p>
+          <Main />
         </Modal>
       )}
     </>
   );
 };
 
-export default WpmMgt;
+export default UeMgt;

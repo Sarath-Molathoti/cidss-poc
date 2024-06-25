@@ -4,23 +4,22 @@ import React, { useState } from "react";
 
 import { FaCaretDown, FaCaretRight } from "react-icons/fa6";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+
 const MultiLevelDropdown = ({
   data,
   title,
   topLevelIcon,
   buttonClassName,
   menuClassName,
+  handleMenuClick,
 }) => {
   const [activeMenus, setActiveMenus] = useState({});
-  const router = useRouter();
 
   const handleToggle = (level, item) => {
     setActiveMenus((prev) => ({
       ...prev,
       [`${level}-${item.name}`]: !prev[`${level}-${item.name}`],
     }));
-    router.push(item.component);
   };
 
   const handleMouseEnter = (level, item) => {
@@ -58,7 +57,10 @@ const MultiLevelDropdown = ({
             >
               <div
                 className="flex items-center justify-start cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 whitespace-nowrap overflow-hidden"
-                onClick={() => handleToggle(level, item)}
+                onClick={() => {
+                  handleToggle(level, item);
+                  handleMenuClick(item.name);
+                }}
               >
                 <Image
                   src={item.image}
@@ -92,7 +94,10 @@ const MultiLevelDropdown = ({
     >
       <button
         className={`inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-1 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none ${buttonClassName} `}
-        onClick={() => handleToggle(0, title)}
+        onClick={() => {
+          handleToggle(0, title);
+          handleMenuClick(title);
+        }}
       >
         <div className="flex items-center">
           {topLevelIcon && (

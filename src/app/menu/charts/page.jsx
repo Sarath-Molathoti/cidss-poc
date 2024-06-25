@@ -1,12 +1,23 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "../../../components/Modal";
 import PieChart from "../../../components/charts/PieChart";
+import useModalStore from "../../../stores/ModalStore";
 const LgsOverview = () => {
+  const incrementZIndex = useModalStore((state) => state.incrementZIndex);
+
+  useEffect(() => {
+    incrementZIndex();
+  }, []);
+
+  const zIndex = useModalStore((state) => state.zIndex);
+
   const [isModalOpen, setIsModalOpen] = useState(true);
 
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+  const closeModal = () => {
+    console.log("Lgs overview closed");
+    setIsModalOpen(false);
+  };
 
   const actions = [
     {
@@ -33,6 +44,7 @@ const LgsOverview = () => {
     { name: "Group D", value: 200 },
   ];
   const colors = ["#8884d8", "#82ca9d", "#ffc658", "#ff7f0e"];
+  console.log("z-index 2: ", zIndex);
   return (
     <>
       {isModalOpen && (
@@ -40,8 +52,9 @@ const LgsOverview = () => {
           title="Lgs Overview"
           onClose={closeModal}
           actions={actions}
-          customWidth="w-9/10"
+          customWidth="w-4/6"
           customHeight="h-7/8"
+          zIndex={70}
         >
           <div className="grid grid-flow-row grid-cols-1 lg:grid-cols-3 gap-3">
             <div className="border-2 border-slate-800">

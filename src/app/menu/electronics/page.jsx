@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "../../../components/Modal";
 import Button from "../../../components/Button";
 import SearchBar from "../../../components/SearchBar";
@@ -7,10 +7,18 @@ import { IoCloudUploadOutline, IoCloudDownloadOutline } from "react-icons/io5";
 import { IoIosMore } from "react-icons/io";
 import ElectronicsTable from "./ElectronicsTable";
 import WpmMgt from "../wpn-mgt/page";
+import useModalStore from "../../../stores/ModalStore";
+
 const Electronics = () => {
+  const incrementZIndex = useModalStore((state) => state.incrementZIndex);
+
+  useEffect(() => {
+    incrementZIndex();
+  }, []);
+
+  const zIndex = useModalStore((state) => state.zIndex);
   const [isModalOpen, setIsModalOpen] = useState(true);
 
-  const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
   const actions = [
@@ -42,6 +50,7 @@ const Electronics = () => {
           actions={actions}
           customWidth="w-1/2"
           customHeight="h-5/10"
+          zIndex={zIndex}
         >
           <div className="flex flex-col ">
             <div className="flex items-center justify-between">

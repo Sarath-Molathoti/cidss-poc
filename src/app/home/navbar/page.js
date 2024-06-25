@@ -6,6 +6,11 @@ import Logo from "../../../assets/images/flag.jpg";
 import MilitaryLogo from "../../../assets/images/logo-one.jpg";
 import { FaPowerOff } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import WpmMgt from "../../menu/wpn-mgt/page.jsx";
+import LgsOverview from "../../menu/charts/page.jsx";
+import Electronics from "../../menu/electronics/page.jsx";
+import Mail from "../../menu/mail/page.jsx";
+import UeMgt from "../../menu/ue-mgt/page.jsx";
 const menuData = {
   HOME: {
     image: Logo,
@@ -18,9 +23,9 @@ const menuData = {
       {
         name: "Lgs Overview",
         image: MilitaryLogo,
-        component: "/menu/charts",
+        component: <LgsOverview />,
       },
-      { name: "Wpn Mgt", image: Logo, component: "/menu/wpn-mgt" },
+      { name: "Wpn Mgt", image: Logo, component: <WpmMgt /> },
       {
         name: "Engg. Store Mgt",
         image: Logo,
@@ -49,7 +54,7 @@ const menuData = {
           },
         ],
       },
-      { name: "UE Mgt", image: MilitaryLogo, component: "/" },
+      { name: "UE Mgt", image: MilitaryLogo, component: <UeMgt /> },
     ],
   },
 
@@ -89,13 +94,13 @@ const menuData = {
           { name: "Estimation", image: MilitaryLogo, component: "/" },
         ],
       },
-      { name: "Electronics", image: Logo, component: "/menu/electronics" },
+      { name: "Electronics", image: Logo, component: <Electronics /> },
     ],
   },
   Mail: {
     image: Logo,
     items: [],
-    component: "/",
+    component: <Mail />,
   },
   "Instant Message": {
     image: Logo,
@@ -107,6 +112,7 @@ const menuData = {
 const NavBar = () => {
   const router = useRouter();
   const [loggedIn, setLoggedIn] = useState(false);
+  const [selectedComponent, setSelectedComponent] = useState(null);
   useEffect(() => {
     const storedUserDetails = JSON.parse(localStorage.getItem("loggedIn"));
     if (storedUserDetails && storedUserDetails === "true") {
@@ -117,6 +123,52 @@ const NavBar = () => {
     e.preventDefault();
     localStorage.setItem("loggedIn", JSON.stringify("true"));
     router.push("/");
+  };
+
+  function findComponent(input) {
+    // Convert input to uppercase to match keys case insensitively
+    const upperInput = input.toUpperCase();
+
+    // Loop through each category in menuData
+    for (const category in menuData) {
+      // Check if the category matches the input
+      if (category.toUpperCase() === upperInput) {
+        console.log(menuData[category].component);
+        return menuData[category].component;
+      }
+
+      // Check each item in the current category's items array
+      for (const item of menuData[category].items) {
+        // Check if item name matches the input
+        if (item.name.toUpperCase() === upperInput) {
+          console.log(item.component);
+          return item.component;
+        }
+
+        // Check subItems if they exist
+        if (item.subItems) {
+          for (const subItem of item.subItems) {
+            // Check if subItem name matches the input
+            if (subItem.name.toUpperCase() === upperInput) {
+              console.log(subItem.component);
+              return subItem.component;
+            }
+          }
+        }
+      }
+    }
+
+    // If no match found
+    console.log("Component not found.");
+  }
+
+  const handleMenuClick = (component) => {
+    //if (component === "Wpn Mgt") {
+    setSelectedComponent(findComponent(component));
+    // } else {
+    //   setSelectedComponent(<LgsOverview />);
+    // }
+    // console.log("selected the component" + findComponent(component));
   };
   return (
     <>
@@ -133,6 +185,7 @@ const NavBar = () => {
                   topLevelIcon={menuData[menu].image}
                   buttonClassName="border-0 hover:bg-violet-700 bg-violet-900 text-white"
                   menuClassName="custom-menu-class"
+                  handleMenuClick={handleMenuClick}
                 />
               ))}
             </div>
@@ -142,6 +195,9 @@ const NavBar = () => {
           </div>
         </div>
       ) : null}
+      {selectedComponent && (
+        <div className="main-content">{selectedComponent}</div>
+      )}
     </>
   );
 };

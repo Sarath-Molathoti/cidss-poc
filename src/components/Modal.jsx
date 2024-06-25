@@ -4,7 +4,6 @@ import { useState } from "react";
 import Draggable from "react-draggable";
 import { IoMdClose } from "react-icons/io";
 import { FaPlus, FaMinus, FaCcApplePay } from "react-icons/fa6";
-
 const Modal = ({
   title,
   children,
@@ -12,6 +11,7 @@ const Modal = ({
   actions,
   customWidth,
   customHeight,
+  zIndex,
 }) => {
   const [isMaximized, setIsMaximized] = useState(false);
 
@@ -19,10 +19,11 @@ const Modal = ({
     setIsMaximized(!isMaximized);
   };
 
+  console.log("z-index : ", zIndex);
   return (
     <div
-      className="fixed inset-0 z-50 flex justify-center pointer-events-none"
-      style={{ marginTop: "16vh" }}
+      className="fixed inset-0 flex justify-center pointer-events-none"
+      style={{ marginTop: "16vh", zIndex }}
     >
       <Draggable handle=".modal-header">
         <div

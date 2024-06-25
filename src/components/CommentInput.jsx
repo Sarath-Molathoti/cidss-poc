@@ -2,11 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import { twMerge } from "tailwind-merge";
 
-const TextField = ({
+const CommentInput = ({
   label,
   id,
-  type = "text",
-  placeholder,
+  placeholder = "Write a comment...",
   value,
   onChange,
   containerClassName = "",
@@ -32,8 +31,7 @@ const TextField = ({
             {prefixIcon}
           </div>
         )}
-        <input
-          type={type}
+        <textarea
           id={id}
           placeholder={placeholder}
           value={value}
@@ -41,7 +39,7 @@ const TextField = ({
           className={twMerge(
             `shadow appearance-none border rounded w-full text-lg text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
               prefixIcon ? "pl-10" : "pl-3"
-            } py-3`,
+            } py-3 resize-none`,
             inputClassName
           )}
           {...props}
@@ -52,10 +50,9 @@ const TextField = ({
   );
 };
 
-TextField.propTypes = {
+CommentInput.propTypes = {
   label: PropTypes.string,
   id: PropTypes.string.isRequired,
-  type: PropTypes.string,
   placeholder: PropTypes.string,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
@@ -66,4 +63,4 @@ TextField.propTypes = {
   error: PropTypes.string,
 };
 
-export default TextField;
+export default CommentInput;

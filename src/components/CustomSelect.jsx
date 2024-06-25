@@ -20,7 +20,7 @@ const CustomSelect = ({
       {label && (
         <label
           htmlFor={id}
-          className={`block text-gray-700 text-sm font-bold mb-2 ${labelClassName}`}
+          className={`block text-gray-700 text-sm font-bold mb-1 ${labelClassName}`}
         >
           {label}
         </label>
